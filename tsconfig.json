@@ -19,10 +19,50 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@main/*": [
+        "src/app/main/*"
+      ],
+      "@environment": [
+        "src/environments/environment"
+      ],
+      "@utils/http": [
+        "src/app/utils/http/index.ts"
+      ],
+      "@utils/components/*": [
+        "src/app/utils/components/*"
+      ],
+      "@utils/base": [
+        "src/app/utils/base/index.ts"
+      ],
+      "@utils/service": [
+        "src/app/utils/service/index.ts"
+      ],
+      "@utils/state": [
+        "src/app/utils/state/index.ts"
+      ],
+      "@utils/function": [
+        "src/app/utils/function/index.ts"
+      ],
+      "@utils/constant": [
+        "src/app/utils/constant/index.ts"
+      ],
+      "@app-state": [
+        "src/app/app.state.ts"
+      ],
+      "@global-settings": [
+        "src/app/global-settings.ts"
+      ],
+      "@shared/schema": [
+        "src/app/shared/schema/index.ts"
+      ],
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

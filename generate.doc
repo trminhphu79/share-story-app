@@ -1,0 +1,8 @@
+// GENERATE COMPONENT STANDALONE AND DEPENDENCIES
+ng g @schematics/angular:component side-nav --change-detection OnPush --skip-import --skip-tests --standalone && (cd side-nav && touch index.ts side-nav.model.ts side-nav.util.ts side-nav.constant.ts && mkdir component service client store  && (cd service && touch index.ts) && (cd client && touch index.ts) && (cd store && touch index.ts) && (cd component && touch index.ts))
+
+
+//GENERATE COMPONENT STANDALONE 
+ng g @schematics/angular:component sidebar --change-detection OnPush --skip-import --skip-tests --standalone
+
+ng g @schematics/angular:component sidebar --change-detection OnPush --skip-import --skip-tests --standalone && (cd sidebar && touch index.ts sidebar)
