@@ -7,7 +7,7 @@ import { getGoogleOAuthURL } from "../function";
 export class SessionService extends HttpService {
     readonly API_URL = `${GLOBAL_SETTINGS.restURL}/api/${GLOBAL_SETTINGS.apiVersion}/sessions/`;
 
-    submitItem$(params) {
+    submitItem$(params: any) {
         return this.submitItem(`${this.API_URL}`, params)
     }
 

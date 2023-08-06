@@ -8,6 +8,7 @@ import {
 } from "tw-elements";
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { BaseComponent } from '@utils/base';
 
 @Component({
   selector: "tmp-header",
@@ -17,14 +18,16 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
+export class HeaderComponent extends BaseComponent {
 
   router = inject(Router)
 
-  isLogin: boolean = true;
+  constructor(){
+    super();
+  }
 
   ngOnInit() {
-
+    
   }
 
   ngOnChanges() {

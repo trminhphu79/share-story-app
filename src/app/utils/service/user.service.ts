@@ -1,7 +1,7 @@
-import { IUser } from '@shared/schema';
+import { IUser } from '@utils/schema';
 import { Injectable, inject } from "@angular/core";
-import { AuthService } from "@shared/service";
-import { HttpService } from "@shared/http"
+import { AuthService } from "@utils/service";
+import { HttpService } from "@utils/http"
 import { GLOBAL_SETTINGS } from "@global-settings";
 import { map } from 'rxjs';
 
@@ -20,10 +20,10 @@ export class UserService extends HttpService {
     }
 
     getItem$() {
-        return this.getItem<IUser>(`${this.API_URL}/me`).pipe(map((m) => m.value))
+        return this.getItem<IUser>(`${this.API_URL}me`) 
     }
 
-    submitItem$(params) {
+    submitItem$(params: any) {
         return this.submitItem(`${this.API_URL}/users`, params)
     }
 }

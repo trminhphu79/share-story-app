@@ -1,18 +1,23 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import modules from './main.import';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BaseComponent } from '../utils/base/base.component';
-import { IUser } from '@utils/schema';
+import { BaseComponent } from '@utils/base';
+import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderComponent } from '@utils/components/loader';
 
 @Component({
-  selector: "tmp-main",
+  selector: 'app-shell',
   standalone: true,
-  imports: [...modules],
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    CommonModule,
+    MatProgressSpinnerModule,
+    LoaderComponent
+  ],
+  template: `<tmp-loader></tmp-loader>`,
+  styleUrls: ['./app-shell.component.scss']
 })
-export class MainComponent extends BaseComponent {
+export class AppShellComponent extends BaseComponent implements OnInit {
   router = inject(Router);
 
   ngOnInit() {
@@ -27,10 +32,9 @@ export class MainComponent extends BaseComponent {
     else {
       this.userService.getItem$().subscribe({
         next: res => {
-          console.log('res,..',res)
           if (res) {
             const user = res;
-            this.appState.me = user as any;
+            this.appState.me = user;
             this.appState.ready = true;
             this.stateService.commit(this.appState);
             this.navToRoot();
@@ -46,7 +50,7 @@ export class MainComponent extends BaseComponent {
   }
 
   navToRoot() {
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 
   clearAppStorage() {
@@ -64,9 +68,13 @@ export class MainComponent extends BaseComponent {
     this.router.navigate(['signin']);
   }
 
+  navToHome() {
+    this.router.navigate(['/']);
+  }
+
   restartApp() {
     this.clearAppStorage();
     this.syncAppState();
-    this.navToRoot();
+    this.navToHome();
   }
 }

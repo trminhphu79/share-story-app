@@ -59,8 +59,8 @@
       "@global-settings": [
         "src/app/global-settings.ts"
       ],
-      "@shared/schema": [
-        "src/app/shared/schema/index.ts"
+      "@utils/schema": [
+        "src/app/utils/schema/index.ts"
       ],
     }
   },
