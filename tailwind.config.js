@@ -6,7 +6,16 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    screens: {
+      mobile: {'min': '320px', 'max': '599px'},
+      sm: '600px',
+      md: '960px',
+      lg: '1280px',
+      xl: '1440px'
+    }
   },
   darkMode: "class",
-  plugins: [require("tw-elements/dist/plugin.cjs")]
+  plugins: [
+    require("tw-elements/dist/plugin.cjs"),
+  ]
 }

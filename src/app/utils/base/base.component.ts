@@ -40,12 +40,9 @@ export abstract class BaseComponent implements OnDestroy {
         this.appState = this.stateService.currentState;
         this.stateService.stateChanges$.pipe(takeUntil(this.destroy$)).subscribe({
             next: (changes) => {
-                console.log('changes..', changes)
                 if (changes instanceof Effect) {
                     this.appState = changes.newState;
-                    this.changeDetectorRef.detectChanges();
                 }
-
                 else
                     this.appState = changes;
             }
