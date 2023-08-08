@@ -14,11 +14,19 @@ import { BaseComponent } from '@utils/base';
 import { takeUntil } from 'rxjs';
 import { IUser } from '@utils/schema';
 import { Effect } from '@utils/state';
+import { UserAvatarComponent } from './components';
 
 @Component({
   selector: "tmp-header",
   standalone: true,
-  imports: [CommonModule, RouterModule, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    UserAvatarComponent
+  ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -27,6 +35,7 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
 
   router = inject(Router)
   user: IUser | null = this.appState.me;
+  ready: boolean = false;
   constructor() {
     super();
   }
@@ -36,7 +45,9 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
       next: (result) => {
         if (result instanceof Effect) {
           this.user = result.newState.me;
+          this.ready = result.newState.ready;
           this.changeDetectorRef.detectChanges();
+          console.log(this.user)
         }
       }
     })
@@ -54,7 +65,7 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
     this.router.navigate(['/signin'])
   }
 
-  logout() {
+  logout(e: any) {
     this.sessionService.logout$().subscribe({
       next: () => {
         this.user = null;

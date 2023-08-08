@@ -13,7 +13,7 @@ export class SignInService {
         this._sessionService.submitItem$(params).subscribe({
             next: (result) => {
                 if (result) {
-                    this._router.navigate(['/']);
+                    this._router.navigate(['/trang-chu']);
                 }
             },
             error: (error) => {

@@ -32,52 +32,22 @@
     </div>
 
     <!-- Right elements -->
-    <ng-container *ngIf="user; else nonLoginTemplate">
-      <ng-contaner [ngTemplateOutlet]="loggedTemplate"></ng-contaner>
+    <ng-container *ngIf="appState.me; else noneLogginTemplate">
+      <tmp-user-avatar [user]="appState.me" (logout)="logout($event)"></tmp-user-avatar>
     </ng-container>
+
+    <ng-template #noneLogginTemplate>
+      <div class="relative flex items-center">
+        <button (click)="signin()" type="button" data-te-ripple-init
+          class="mr-3 inline-block rounded-full bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200">
+          Đăng ký
+        </button>
+        <button (click)="signin()" type="button" data-te-ripple-init data-te-ripple-color="primary"
+          class="mr-3 inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+          Đăng nhập
+        </button>
+      </div>
+    </ng-template>
+
   </div>
 </nav>
-
-<!-- Signin Button Template -->
-<ng-template #nonLoginTemplate>
-  <div class="relative flex items-center">
-    <button (click)="signin()" type="button" data-te-ripple-init
-      class="mr-3 inline-block rounded-full bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200">
-      Đăng ký
-    </button>
-    <button (click)="signin()" type="button" data-te-ripple-init data-te-ripple-color="primary"
-      class="mr-3 inline-block rounded-full bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-      Đăng nhập
-    </button>
-  </div>
-</ng-template>
-
-<ng-template #loggedTemplate>
-  <div class="relative flex items-center">
-    <!-- Notification -->
-    <div class="relative">
-      <a class="hidden-arrow mr-4 flex items-center text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-        role="button" aria-expanded="false">
-        <mat-icon class="[&>svg]:w-5" svgIcon="ic_notification"></mat-icon>
-        <span
-          class="absolute -mt-4 ml-2.5 rounded-full bg-danger px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-white">1</span>
-      </a>
-    </div>
-
-    <!-- User Avatar -->
-    <div class="relative" [matMenuTriggerFor]="menu">
-      <a class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-        id="user-avatar" role="button" data-te-dropdown-toggle-ref aria-expanded="false">
-        <img src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg" class="rounded-full" style="height: 25px; width: 25px"
-          alt="" loading="lazy" />
-        <mat-icon class="w-2" svgIcon="ic_arrow-down"></mat-icon>
-      </a>
-
-      <mat-menu #menu="matMenu" [xPosition]="'before'">
-        <button  mat-menu-item class="text-xs font-medium">Thông tin</button>
-        <button  mat-menu-item class="text-xs font-medium">Cài đặt</button>
-        <button  mat-menu-item class="text-xs font-medium" (click)="logout()">Đăng xuất</button>
-      </mat-menu>
-    </div>
-  </div>
-</ng-template>

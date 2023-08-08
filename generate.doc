@@ -5,4 +5,4 @@ ng g @schematics/angular:component side-nav --change-detection OnPush --skip-imp
 //GENERATE COMPONENT STANDALONE 
 ng g @schematics/angular:component sidebar --change-detection OnPush --skip-import --skip-tests --standalone
 
-ng g @schematics/angular:component sidebar --change-detection OnPush --skip-import --skip-tests --standalone && (cd sidebar && touch index.ts sidebar)
+ng g @schematics/angular:component user-avatar --change-detection OnPush --skip-import --skip-tests --standalone && (cd user-avatar && touch index.ts user-avatar)

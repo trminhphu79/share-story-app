@@ -4,6 +4,8 @@ import { BaseComponent } from '@utils/base';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderComponent } from '@utils/components/loader';
+import { Effect } from '@utils/state';
+import { PreviousRouteService } from '@utils/service';
 
 @Component({
   selector: 'app-shell',
@@ -18,7 +20,7 @@ import { LoaderComponent } from '@utils/components/loader';
   styleUrls: ['./app-shell.component.scss']
 })
 export class AppShellComponent extends BaseComponent implements OnInit {
-  router = inject(Router);
+  private _router = inject(Router);
 
   ngOnInit() {
     this.verifyAccessToken();
@@ -28,13 +30,11 @@ export class AppShellComponent extends BaseComponent implements OnInit {
     if (this.appState.me) {
       this.restartApp();
       this.navToRoot();
-    }
-    else {
+    } else {
       this.userService.getItem$().subscribe({
-        next: res => {
+        next: (res: any) => {
           if (res) {
-            const user = res;
-            this.appState.me = user;
+            this.appState.me = res;
             this.appState.ready = true;
             this.stateService.commit(this.appState);
             this.navToRoot();
@@ -50,7 +50,7 @@ export class AppShellComponent extends BaseComponent implements OnInit {
   }
 
   navToRoot() {
-    this.router.navigate(['/']);
+    this._router.navigate(['trang-chu']);
   }
 
   clearAppStorage() {
@@ -65,11 +65,11 @@ export class AppShellComponent extends BaseComponent implements OnInit {
   }
 
   navToLogin() {
-    this.router.navigate(['signin']);
+    this._router.navigate(['signin']);
   }
 
   navToHome() {
-    this.router.navigate(['/']);
+    this._router.navigate(['trang-chu']);
   }
 
   restartApp() {
