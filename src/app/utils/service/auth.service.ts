@@ -2,21 +2,18 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { IUser } from "@utils/schema";
 import { Observable } from "rxjs";
+import { LocalStorageService } from "./localStorage.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
+    private _localStorageService = inject(LocalStorageService);
 
-    http = inject(HttpClient)
-
-    getUser(): Observable<IUser> {
-        return this.http.get<IUser>('http://localhost:4201/api/v1/me')
+    public getToken(): string | null {
+        return this._localStorageService.getItem('accessToken');
     }
 
-    logout(): Observable<any> {
-        return this.http.post('http://localhost:4201/api/v1/me/logout', null)
-    }
-
-    login(payload: { email: string, password: string }) {
-        return this.http.post("http://localhost:4201/api/v1/sessions", payload)
+    public isAuthenticated(): boolean {
+        const token = this.getToken();
+        return !!token;
     }
 }

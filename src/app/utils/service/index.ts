@@ -7,3 +7,4 @@ export * from './auth.service';
 export * from './interceptor.service';
 export * from './session.service';
 export * from './previous-page.service';
+export * from './localStorage.service';

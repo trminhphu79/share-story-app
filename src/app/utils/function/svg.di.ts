@@ -10,5 +10,6 @@ export const ICON_CONFIG_TOKEN = new InjectionToken<TIconsList[]>('IconList', {
 })
 
 export function initIconRegistry(iconRegistryService: IconRegistryService, icons: TIconsList[]): () => void {
+    console.log("initIconRegistry....")
     return () => iconRegistryService.registerIcons(icons);
 }

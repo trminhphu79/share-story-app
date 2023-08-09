@@ -3,9 +3,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApplicationConfig } from "@angular/platform-browser";
 import { provideRouter } from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IconRegistryService, WithCredentialsInterceptor } from '@utils/service';
-import { ICON_CONFIG_TOKEN, initIconRegistry } from "@utils/function";
-import { provideStateConfigs } from "@utils/state";
+import { AuthInterceptor, AuthService, IconRegistryService, UserService } from '@utils/service';
+import { ICON_CONFIG_TOKEN, initIconRegistry, verifyToken } from "@utils/function";
+import { StateService, provideStateConfigs } from "@utils/state";
 import { INITIAL_STATE } from "@app-state";
 import { userResolver } from "./utils/guard";
 
@@ -37,15 +37,18 @@ export const appConfigure: ApplicationConfig = {
                 path: "signin",
                 loadComponent() {
                     return import('./main/signin').then((c) => c.SigninComponent)
-                }
+                },
+            },
+
+            {
+                path: "signin/oauth/success",
+                loadComponent() {
+                    return import('./main/signin/components').then((c) => c.SigninSuccessComponent)
+                },
             },
 
         ]),
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: WithCredentialsInterceptor,
-            multi: true
-        },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         provideStateConfigs({
             initialState: INITIAL_STATE,
         }),
@@ -60,5 +63,11 @@ export const appConfigure: ApplicationConfig = {
             deps: [IconRegistryService, ICON_CONFIG_TOKEN],
             multi: true
         },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: verifyToken,
+            deps: [AuthService, StateService, UserService],
+            multi: true
+        }
     ]
 }

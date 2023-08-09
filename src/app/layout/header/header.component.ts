@@ -41,6 +41,7 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
   }
 
   ngOnInit() {
+    console.log(this.appState.me)
     this.stateService.stateChanges$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (result) => {
         if (result instanceof Effect) {

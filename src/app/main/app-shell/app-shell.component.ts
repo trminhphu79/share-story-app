@@ -27,10 +27,7 @@ export class AppShellComponent extends BaseComponent implements OnInit {
   }
 
   verifyAccessToken() {
-    if (this.appState.me) {
-      this.restartApp();
-      this.navToRoot();
-    } else {
+    if (this.authService.isAuthenticated() && !this.appState.me) {
       this.userService.getItem$().subscribe({
         next: (res: any) => {
           if (res) {
@@ -39,12 +36,15 @@ export class AppShellComponent extends BaseComponent implements OnInit {
             this.stateService.commit(this.appState);
             this.navToRoot();
           } else
-            this.restartApp();
+              this.restartApp();
         },
         error: () => {
           this.restartApp();
         }
       });
+    } else {
+      this.restartApp();
+      this.navToRoot();
     }
     return;
   }
@@ -73,7 +73,6 @@ export class AppShellComponent extends BaseComponent implements OnInit {
   }
 
   restartApp() {
-    this.clearAppStorage();
     this.syncAppState();
     this.navToHome();
   }

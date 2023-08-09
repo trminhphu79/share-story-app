@@ -18,6 +18,7 @@ export abstract class BaseComponent implements OnDestroy {
     protected changeDetectorRef = inject(ChangeDetectorRef);
     protected location = inject(Location);
 
+    protected authService = inject(AuthService)
     protected userService = inject(UserService);
     protected sessionService = inject(SessionService);
 
@@ -38,6 +39,7 @@ export abstract class BaseComponent implements OnDestroy {
 
     constructor() {
         this.appState = this.stateService.currentState;
+        console.log(this.appState)
         this.stateService.stateChanges$.pipe(takeUntil(this.destroy$)).subscribe({
             next: (changes) => {
                 if (changes instanceof Effect) {
