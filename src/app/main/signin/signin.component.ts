@@ -10,22 +10,58 @@ import { BaseComponent } from '@utils/base';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SignInService } from './service/signin.service';
 import { getGoogleOAuthURL } from '@utils/function';
+import { ActivatedRoute } from '@angular/router';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { BG_IMAGE_URL, PageType } from './constant';
+import { SigninFormBuilder } from './service';
+import { SessionClient, UserClient } from './client';
+import { IUser } from '@utils/schema';
 
 @Component({
   selector: 'tmp-signin',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule],
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    CommonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    LoginComponent,
+    RegisterComponent
+  ],
+  providers: [
+    SignInService,
+    SigninFormBuilder,
+    UserClient,
+    SessionClient
+  ]
 })
 export class SigninComponent extends BaseComponent {
 
   private _service: SignInService = inject(SignInService);
-  public formGroup!: FormGroup;
+  private _route: ActivatedRoute = inject(ActivatedRoute);
+  private _signInFormBuilder = inject(SigninFormBuilder);
+
+  get form(): FormGroup {
+    return this._signInFormBuilder.currentForm;
+  }
+
+  public type!: PageType;
+
+  get bgImage(): string {
+    return this.type == PageType.Login ? BG_IMAGE_URL.LOGIN : BG_IMAGE_URL.REGISTER
+  }
 
   public ngOnInit() {
-    this._initForm();
+    if (this._route.snapshot.paramMap.get('type') !== PageType.Login && this._route.snapshot.paramMap.get('type') !== PageType.Register) {
+      this.backHome();
+      return
+    }
+    this.type = this._route.snapshot.paramMap.get('type') as PageType;
+    this._signInFormBuilder.buildForm(this.type);
+    console.log(this.form)
   }
 
   public ngAfterViewInit() {
@@ -36,33 +72,23 @@ export class SigninComponent extends BaseComponent {
     initTE({ Input, Ripple });
   }
 
-  private _initForm() {
-    this.formGroup = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required]),
-    })
-  }
-
-
-
-  /**
-   * @Description Login with account
-   */
-  signin() {
-    console.log(this.formGroup.value)
-    if (this.formGroup.invalid) {
-      this.formGroup.markAllAsTouched();
+  requestRegister() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return
     }
-
-    this._service.signIn(this.formGroup.value)
+    this._service.register(this.form.value);
   }
 
+  requestSignIn() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return
+    }
+    this._service.signIn(this.form.value);
+  }
 
-  /**
-   * @Description Signin with google account
-   */
-  signinWithGoogle(){
+  requestGoogleOAuth() {
     window.open(getGoogleOAuthURL(), '_self')
   }
 }

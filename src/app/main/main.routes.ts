@@ -7,5 +7,12 @@ export const mainRoutes: Routes = [
         loadComponent() {
             return import('./home').then((c) => c.HomeComponent)
         }
+    },
+    {
+        path: "tim-kiem",
+        title: "Kết quả tìm kiếm",
+        loadComponent() {
+            return import('./search-result/search-result.component').then((c) => c.SearchResultComponent)
+        },
     }
 ]

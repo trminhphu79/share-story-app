@@ -6,6 +6,7 @@ import { IAppState } from '@app-state';
 import { StateService } from '../state/state.service';
 import { Effect } from '../state/state.schema';
 import { AuthService, SessionService, UserService } from '@utils/service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,7 @@ export abstract class BaseComponent implements OnDestroy {
     protected authService = inject(AuthService)
     protected userService = inject(UserService);
     protected sessionService = inject(SessionService);
-
+    protected router = inject(Router);
     protected destroy$ = new Subject<void>();
     protected subscriptions = new Map<string, Subscription>();
 
@@ -61,6 +62,9 @@ export abstract class BaseComponent implements OnDestroy {
         return index;
     }
 
+    backHome() {
+        this.router.navigate(['trang-chu'])
+    }
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();

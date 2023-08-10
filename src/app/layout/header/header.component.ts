@@ -15,6 +15,7 @@ import { takeUntil } from 'rxjs';
 import { IUser } from '@utils/schema';
 import { Effect } from '@utils/state';
 import { UserAvatarComponent } from './components';
+import { InputSearchComponent } from './components/input-search';
 
 @Component({
   selector: "tmp-header",
@@ -25,7 +26,8 @@ import { UserAvatarComponent } from './components';
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    UserAvatarComponent
+    UserAvatarComponent,
+    InputSearchComponent
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
@@ -33,7 +35,6 @@ import { UserAvatarComponent } from './components';
 })
 export class HeaderComponent extends BaseComponent implements AfterViewInit {
 
-  router = inject(Router)
   user: IUser | null = this.appState.me;
   ready: boolean = false;
   constructor() {
@@ -57,13 +58,21 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
   ngOnChanges() {
   }
 
+  onEnter(result: string) {
+    console.log('enter...', result);
+    this.router.navigate(['trang-chu/tim-kiem'])
+  }
+
   ngAfterViewInit() {
     initTE({ Collapse, Dropdown, Ripple });
   }
 
+  signup() {
+    this.router.navigate(['/signin/re'])
+  }
 
   signin() {
-    this.router.navigate(['/signin'])
+    this.router.navigate(['/signin/in'])
   }
 
   logout(e: any) {

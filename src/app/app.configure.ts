@@ -34,7 +34,7 @@ export const appConfigure: ApplicationConfig = {
                 }
             },
             {
-                path: "signin",
+                path: "signin/:type",
                 loadComponent() {
                     return import('./main/signin').then((c) => c.SigninComponent)
                 },

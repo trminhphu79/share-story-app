@@ -16,7 +16,7 @@ import { PreviousRouteService } from '@utils/service';
     MatProgressSpinnerModule,
     LoaderComponent
   ],
-  template: `<tmp-loader></tmp-loader>`,
+  template: ``,
   styleUrls: ['./app-shell.component.scss']
 })
 export class AppShellComponent extends BaseComponent implements OnInit {

@@ -11,12 +11,17 @@ import { BaseComponent } from '../utils/base/base.component';
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MainComponent {
+export class MainComponent extends BaseComponent {
 
   constructor() {
+    super();
 
   }
-  ngOnInit() { }
+  ngOnInit() {
+    const appState = this.stateService.currentState;
+    appState.ready = true;
+    this.stateService.commit(appState);
+  }
 }
 
 

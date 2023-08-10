@@ -1,14 +1,15 @@
 .fui-loading-ripple {
+    display: flex;
     position: relative;
-    width: 80px;
-    height: 80px;
+    margin: 0 auto;
     top: 50%;
     transform: translateY(-50%);
-    margin: 0 auto;
+    width: 80px;
+    height: 80px;
 
     div {
         position: absolute;
-        border: 4px solid var(--theme-label-link);
+        border: 4px solid #406EB4;
         opacity: 1;
         border-radius: 50%;
         animation: giaFU 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
