@@ -7,16 +7,14 @@ import {
 } from "tw-elements";
 import { MatIconModule } from '@angular/material/icon';
 import { BaseComponent } from '@utils/base';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SignInService } from './service/signin.service';
-import { getGoogleOAuthURL } from '@utils/function';
 import { ActivatedRoute } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { BG_IMAGE_URL, PageType } from './constant';
 import { SigninFormBuilder } from './service';
 import { SessionClient, UserClient } from './client';
-import { IUser } from '@utils/schema';
 
 @Component({
   selector: 'tmp-signin',
@@ -89,6 +87,6 @@ export class SigninComponent extends BaseComponent {
   }
 
   requestGoogleOAuth() {
-    window.open(getGoogleOAuthURL(), '_self')
+    this._service.oauthGoogle()
   }
 }

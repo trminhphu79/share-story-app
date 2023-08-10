@@ -7,6 +7,7 @@ import { SessionClient, UserClient } from "../client";
 import { StateService } from "@utils/state";
 import { IAppState } from "@app-state";
 import { IUser } from "@utils/schema";
+import { getGoogleOAuthURL } from "@utils/function";
 
 @Injectable()
 export class SignInService {
@@ -49,5 +50,9 @@ export class SignInService {
             }
         }
         )
+    }
+
+    public oauthGoogle(){
+        window.open(getGoogleOAuthURL(), '_self')
     }
 }
