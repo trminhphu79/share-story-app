@@ -50,7 +50,7 @@ export class AppShellComponent extends BaseComponent implements OnInit {
   }
 
   navToRoot() {
-    this._router.navigate(['trang-chu']);
+    this._router.navigate(['']);
   }
 
   clearAppStorage() {
@@ -69,7 +69,7 @@ export class AppShellComponent extends BaseComponent implements OnInit {
   }
 
   navToHome() {
-    this._router.navigate(['trang-chu']);
+    this._router.navigate(['']);
   }
 
   restartApp() {

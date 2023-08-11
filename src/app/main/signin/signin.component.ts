@@ -70,7 +70,7 @@ export class SigninComponent extends BaseComponent {
     initTE({ Input, Ripple });
   }
 
-  requestRegister() {
+  public  submitRegister() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return
@@ -78,7 +78,7 @@ export class SigninComponent extends BaseComponent {
     this._service.register(this.form.value);
   }
 
-  requestSignIn() {
+  public submitSignIn() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return
@@ -86,7 +86,15 @@ export class SigninComponent extends BaseComponent {
     this._service.signIn(this.form.value);
   }
 
-  requestGoogleOAuth() {
+  public requestGoogleOAuth() {
     this._service.oauthGoogle()
+  }
+
+  public requestRegister() {
+    this.router.navigate(["signin/re"])
+  }
+
+  public requestSignIn() {
+    this.router.navigate(["signin/in"])
   }
 }

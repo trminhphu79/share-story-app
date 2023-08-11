@@ -25,19 +25,13 @@ export class LoginComponent {
   @Input()
   public formGroup!: FormGroup;
   @Output()
-  public requestSignIn = new EventEmitter();
+  public submitSignIn = new EventEmitter();
   @Output()
   public requestGoogleOAuth = new EventEmitter();
+  @Output()
+  public requestRegister = new EventEmitter();
 
-  ngOnInit(){
+  ngAfterViewInit() {
     initTE({ InputELement, Ripple });
-  }
-
-  public signinWithGoogle() {
-    this.requestGoogleOAuth.emit()
-  }
-
-  public signin() {
-    this.requestGoogleOAuth.emit()
   }
 }

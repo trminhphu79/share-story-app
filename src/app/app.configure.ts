@@ -12,13 +12,14 @@ import { userResolver } from "./utils/guard";
 export const appConfigure: ApplicationConfig = {
     providers: [
         provideRouter([
+            // {
+            //     path: "",
+            //     redirectTo: "shell",
+            //     pathMatch: "full",
+            // },
             {
-                path: "",
-                redirectTo: "shell",
+                path: '',
                 pathMatch: "full",
-            },
-            {
-                path: 'trang-chu',
                 // resolve: { data: userResolver },
                 loadComponent() {
                     return import('./main').then((m) => m.MainComponent);
@@ -27,12 +28,12 @@ export const appConfigure: ApplicationConfig = {
                     return import('./main').then((r) => r.mainRoutes)
                 },
             },
-            {
-                path: "shell",
-                loadChildren: () => {
-                    return import('./main/app-shell/app-shell.routes').then((c) => c.routes)
-                }
-            },
+            // {
+            //     path: "shell",
+            //     loadChildren: () => {
+            //         return import('./main/app-shell/app-shell.routes').then((c) => c.routes)
+            //     }
+            // },
             {
                 path: "signin/:type",
                 loadComponent() {

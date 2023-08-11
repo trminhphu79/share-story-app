@@ -1,17 +1,22 @@
-#main-content {
+nav {
+    min-height: 65px;
+    height: 65px;
+}
+
+.nav-content {
     min-width: 80%;
     width: 80%;
 }
 
 @media screen and (max-width: 998px) {
-    #main-content {
+    .nav-content {
         min-width: 90%;
         width: 90%;
     }
 }
 
 @media screen and (max-width: 768px) {
-    #main-content {
+    .nav-content {
         min-width: 92%;
         width: 92%;
     }
@@ -20,7 +25,7 @@
 
 
 @media screen and (max-width: 480px) {
-    #main-content {
+    .nav-content {
         min-width: 95%;
         width: 95%;
     }

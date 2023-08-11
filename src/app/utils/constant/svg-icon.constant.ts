@@ -21,6 +21,10 @@ const SOCIAL_ICIONS: TIconsList[] = [
         urlIcon: "assets/icons/ic_google-color.svg",
         key: "ic_google-color"
     },
+    {
+        urlIcon: "assets/icons/ic_default_avatar.svg",
+        key: "ic_default_avatar"
+    }
 ]
 
 const CORE_ICONS: TIconsList[] = [

@@ -63,7 +63,7 @@ export abstract class BaseComponent implements OnDestroy {
     }
 
     backHome() {
-        this.router.navigate(['trang-chu'])
+        this.router.navigate([''])
     }
     ngOnDestroy() {
         this.destroy$.next();

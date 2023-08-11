@@ -8,6 +8,7 @@ import { StateService } from "@utils/state";
 import { IAppState } from "@app-state";
 import { IUser } from "@utils/schema";
 import { getGoogleOAuthURL } from "@utils/function";
+import { switchMap, tap } from "rxjs";
 
 @Injectable()
 export class SignInService {
@@ -19,40 +20,66 @@ export class SignInService {
     private _stateService: StateService<IAppState> = inject(StateService)
 
     public signIn(params: IUserSignIn) {
-        this._sessionClient.submitItem$(params).subscribe({
-            next: ({ accessToken, refreshToken }) => {
-                if (accessToken && refreshToken) {
-                    this._localStorage.setItem("accessToken", accessToken);
-                    this._localStorage.setItem("refreshToken", refreshToken);
-                    this._router.navigate(['shell']);
+        this._sessionClient.submitItem$(params)
+            .pipe(
+                tap(({ accessToken, refreshToken }) => {
+                    if (accessToken && refreshToken) {
+                        this._setToken(accessToken, refreshToken);
+                    }
+                }),
+                switchMap(() => {
+                    return this._userClient.getItem$();
+                })
+            )
+            .subscribe({
+                next: (result: any) => {
+                    if (result) {
+                        const appState = this._stateService.currentState;
+                        appState.me = result
+                        this._stateService.commit(appState);
+                        this._router.navigate(['']);
+                    }
+                },
+                error: (error) => {
+                    console.log(error);
+                    if (error instanceof HttpErrorResponse && error.status == 401) {
+                    }
                 }
-            },
-            error: (error) => {
-                console.log(error);
-                if (error instanceof HttpErrorResponse && error.status == 401) {
-                }
-            }
-        })
+            })
     }
 
     public register(params: IUserSignUp) {
-        return this._userClient.submitItem$(params).subscribe({
-            next: (res: IUser) => {
-                if (res) {
+        return this._userClient.submitItem$(params)
+            .pipe(
+                tap((result) => {
                     const appState = this._stateService.currentState;
-                    appState.me = res;
+                    appState.me = result;
                     this._stateService.commit(appState);
-                    this._router.navigate([""])
+                }),
+                switchMap((result: IUser) => {
+                    return this._sessionClient.submitItem$({ email: result.email, password: params.password })
+                })
+            )
+            .subscribe({
+                next: ({ accessToken, refreshToken }) => {
+                    if (accessToken && refreshToken) {
+                        this._setToken(accessToken, refreshToken);
+                        this._router.navigate(['']);
+                    }
+                },
+                error: (error) => {
+                    console.log(error);
                 }
-            },
-            error: (error) => {
-                console.log(error);
             }
-        }
-        )
+            )
     }
 
-    public oauthGoogle(){
+    public oauthGoogle() {
         window.open(getGoogleOAuthURL(), '_self')
+    }
+
+    private _setToken(accessToken: string, refreshToken: string) {
+        this._localStorage.setItem("accessToken", accessToken);
+        this._localStorage.setItem("refreshToken", refreshToken);
     }
 }

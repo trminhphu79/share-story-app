@@ -16,6 +16,8 @@ import { IUser } from '@utils/schema';
 import { Effect } from '@utils/state';
 import { UserAvatarComponent } from './components';
 import { InputSearchComponent } from './components/input-search';
+import { HeaderLoggedComponent } from './components/header-logged';
+import { HeaderNoneLoginComponent } from './components/header-none-login';
 
 @Component({
   selector: "tmp-header",
@@ -27,7 +29,9 @@ import { InputSearchComponent } from './components/input-search';
     MatButtonModule,
     MatMenuModule,
     UserAvatarComponent,
-    InputSearchComponent
+    InputSearchComponent,
+    HeaderLoggedComponent,
+    HeaderNoneLoginComponent
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
@@ -60,22 +64,22 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
 
   onEnter(result: string) {
     console.log('enter...', result);
-    this.router.navigate(['trang-chu/tim-kiem'])
+    this.router.navigate(['/tim-kiem'])
   }
 
   ngAfterViewInit() {
     initTE({ Collapse, Dropdown, Ripple });
   }
 
-  signup() {
+  requestSignUp() {
     this.router.navigate(['/signin/re'])
   }
 
-  signin() {
+  requestSignIn() {
     this.router.navigate(['/signin/in'])
   }
 
-  logout(e: any) {
+  requestLogout() {
     this.sessionService.logout$().subscribe({
       next: () => {
         this.user = null;

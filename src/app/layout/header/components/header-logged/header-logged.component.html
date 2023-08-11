@@ -1,0 +1,45 @@
+<!-- Main navigation container -->
+<nav class="flex-no-wrap relative flex w-full items-center justify-between bg-[#FBFBFB] py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
+    data-te-navbar-ref>
+    <div class="nav-content flex flex-wrap items-center justify-between m-auto">
+        <!-- Hamburger button for mobile view -->
+
+        <!-- Collapsible navigation container -->
+        <div class="flex gap-x-4 items-center sm:gap-x-2 mobile:gap-x-0">
+
+            <button
+                class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+                type="button" data-te-sidenav-toggle-ref data-te-target="#sidenav" aria-controls="#sidenav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Hamburger icon -->
+                <mat-icon class="[&>svg]:w-7" svgIcon="ic_hambuger"></mat-icon>
+            </button>
+
+
+            <div class="!visible hidden items-center lg:!flex lg:basis-auto">
+                <!-- Left navigation links -->
+                <ul class="list-style-none mr-auto flex flex-col pl-0 lg:flex-row">
+                    <li class="mb-4 lg:mb-0 lg:pr-2">
+                        <!-- Dashboard link -->
+                        <a class="font-bold text-primary text-xl dark:text-neutral-200" data-te-nav-link-ref
+                            (click)="backHome.emit()">SCommunity</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <tmp-input-search class="w-72 mobile:w-60" (onEnter)="requestSearchChanges.emit($event)"></tmp-input-search>
+        </div>
+
+
+        <!-- Right elements -->
+        <ng-container *ngIf="user; ">
+            <tmp-user-avatar [user]="user" (logout)="requestLogout.emit()"></tmp-user-avatar>
+        </ng-container>
+
+        <ng-template #noneLogginTemplate>
+
+        </ng-template>
+
+    </div>
+</nav>

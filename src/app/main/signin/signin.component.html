@@ -9,11 +9,11 @@
             <!-- Right column container with form -->
             <div class="mobile:w-full sm:w-9/12 md:w-4/12 md:m-auto">
                 <tmp-login *ngIf="type == 'in';else registerTemplate" [formGroup]="form"
-                    (requestGoogleOAuth)="requestGoogleOAuth()"
-                    (requestSignIn)="requestSignIn()"
-                    ></tmp-login>
+                    (requestGoogleOAuth)="requestGoogleOAuth()" (submitSignIn)="submitSignIn()"
+                    (requestRegister)="requestRegister()"></tmp-login>
                 <ng-template #registerTemplate>
-                    <tmp-register (requestRegister)="requestRegister()" [formGroup]="form"></tmp-register>
+                    <tmp-register (submitRegister)="submitRegister()" (requestSignIn)="requestSignIn()"
+                        [formGroup]="form"></tmp-register>
                 </ng-template>
             </div>
         </div>

@@ -22,7 +22,7 @@ export class SigninSuccessComponent {
     this._route.queryParamMap.subscribe(queryParams => {
       this._localStorage.setItem("accessToken", queryParams.get('accessToken'));
       this._localStorage.setItem("refreshToken", queryParams.get('refreshToken'));
-      this._router.navigate(['shell'])
+      this._router.navigate([''])
     });
   }
 }

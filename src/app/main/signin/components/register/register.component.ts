@@ -24,13 +24,11 @@ export class RegisterComponent {
   @Input()
   public formGroup!: FormGroup;
   @Output()
-  public requestRegister = new EventEmitter();
+  public submitRegister = new EventEmitter();
+  @Output()
+  public requestSignIn = new EventEmitter();
 
-  ngOnInit() {
+  ngAfterViewInit() {
     initTE({ InputELement, Ripple });
-  }
-
-  register() {
-    this.requestRegister.emit()
   }
 }

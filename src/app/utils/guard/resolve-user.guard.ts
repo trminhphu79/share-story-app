@@ -17,7 +17,7 @@ export const userResolver: ResolveFn<any> =
                 stateService.currentState.me = result;
                 stateService.currentState.ready = true;
                 stateService.commit(stateService.currentState);
-                router.navigate(['trang-chu']);
+                router.navigate(['']);
             })
         )
     };

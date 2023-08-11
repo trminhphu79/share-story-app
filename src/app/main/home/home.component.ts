@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'tmp-home',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  standalone: true
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
 
