@@ -1,11 +1,11 @@
 <div class="w-full flex">
-    <div class="w-7/12">
+    <div class="w-7/12 mobile:w-full">
         <ng-container *ngIf="items$ | async as items">
             <tmp-card *ngFor="let item of items;" [item]="item"></tmp-card>
         </ng-container>
     </div>
 
-    <div class="w-5/12">
+    <div class="w-5/12 mobile:hidden">
         Right nav bar
     </div>
 </div>
