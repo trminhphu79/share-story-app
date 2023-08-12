@@ -15,4 +15,6 @@ export class HeaderNoneLoginComponent {
   public requestSignIn = new EventEmitter();
   @Output()
   public requestSignUp = new EventEmitter();
+  @Output()
+  public backHome = new EventEmitter();
 }

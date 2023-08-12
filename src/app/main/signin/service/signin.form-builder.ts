@@ -1,24 +1,29 @@
 import { Injectable } from "@angular/core";
-import {  FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { PageType } from "../constant";
 import { confirmPasswordValidator, validateEmail, validatePassword } from "@utils/function";
 
 @Injectable()
 export class SigninFormBuilder {
 
-    private _currentForm!: FormGroup;
+    private _currentForm!: FormGroup | null;
 
     get currentForm() {
         return this._currentForm;
     }
 
+    set currentForm(value) {
+        this._currentForm = value;
+    }
+
     buildForm(type: PageType) {
+        this.currentForm = null;
         switch (type) {
             case PageType.Login:
-                this._currentForm = this._generateLoginForm();
+                this.currentForm = this._generateLoginForm();
                 break;
             case PageType.Register:
-                this._currentForm = this._generateRegisterForm();
+                this.currentForm = this._generateRegisterForm();
                 break;
             default:
                 break;

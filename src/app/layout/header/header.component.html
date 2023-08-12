@@ -1,7 +1,9 @@
 <ng-container *ngIf="!appState.me; else loggedTemplate">
-  <tmp-header-none-login class="w-full" (requestSignIn)="requestSignIn()" (requestSignUp)="requestSignUp()"></tmp-header-none-login>
+  <tmp-header-none-login class="w-full" (requestSignIn)="requestSignIn()" (requestSignUp)="requestSignUp()"
+    (backHome)="backHome()"></tmp-header-none-login>
 </ng-container>
 
 <ng-template #loggedTemplate>
-  <tmp-header-logged class="w-full" [user]="appState.me" (requestLogout)="requestLogout()"></tmp-header-logged>
+  <tmp-header-logged class="w-full" [user]="appState.me" (requestSearchChanges)="requestSearchChanges($event)" (requestLogout)="requestLogout()" (backHome)="backHome()"
+    (requestSearching)="requestSearching()"></tmp-header-logged>
 </ng-template>

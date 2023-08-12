@@ -27,7 +27,7 @@ import { SessionClient, UserClient } from './client';
     MatIconModule,
     ReactiveFormsModule,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   providers: [
     SignInService,
@@ -43,7 +43,7 @@ export class SigninComponent extends BaseComponent {
   private _signInFormBuilder = inject(SigninFormBuilder);
 
   get form(): FormGroup {
-    return this._signInFormBuilder.currentForm;
+    return this._signInFormBuilder.currentForm as FormGroup
   }
 
   public type!: PageType;
@@ -59,7 +59,6 @@ export class SigninComponent extends BaseComponent {
     }
     this.type = this._route.snapshot.paramMap.get('type') as PageType;
     this._signInFormBuilder.buildForm(this.type);
-    console.log(this.form)
   }
 
   public ngAfterViewInit() {
@@ -91,10 +90,12 @@ export class SigninComponent extends BaseComponent {
   }
 
   public requestRegister() {
-    this.router.navigate(["signin/re"])
+    this.type = PageType.Register;
+    this._signInFormBuilder.buildForm(this.type);
   }
 
   public requestSignIn() {
-    this.router.navigate(["signin/in"])
+    this.type = PageType.Login;
+    this._signInFormBuilder.buildForm(this.type);
   }
 }

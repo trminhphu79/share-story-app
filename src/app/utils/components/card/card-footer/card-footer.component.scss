@@ -1,0 +1,30 @@
+.card-footer {
+    padding-right: 12px;
+
+    &__left {
+
+        &__comment-icon {
+
+            span {
+                font-size: var(--theme-fs-thirdly);
+                color: var(--theme-label-secondary);
+
+                &:first-child {
+                    margin-right: 8px;
+                }
+
+                &.number {
+                    font-size: var(--theme-fs-primary);
+                    font-weight: var(--theme-fw-400)
+                }
+            }
+        }
+    }
+
+    &__right {
+        &__bookmark-add {
+            width: var(--theme-fs-thirdly);
+            height: var(--theme-fs-thirdly);
+        }
+    }
+}

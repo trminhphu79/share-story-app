@@ -7,6 +7,8 @@ import {
   Ripple,
   initTE,
 } from "tw-elements";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'tmp-login',
@@ -14,7 +16,9 @@ import {
   imports: [
     CommonModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],

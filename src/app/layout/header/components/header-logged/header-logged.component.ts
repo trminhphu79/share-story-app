@@ -39,6 +39,8 @@ export class HeaderLoggedComponent {
   public requestLogout = new EventEmitter();
   @Output()
   public backHome = new EventEmitter();
+  @Output()
+  public requestSearching = new EventEmitter();
 
   constructor() { }
   ngOnInit() {

@@ -1,0 +1,18 @@
+<div class="card-body-content">
+    <div class="card-body-content__left flex-col d-flex justify-content-between">
+        <div class="col-lg-9">
+            <div class="card-body-content__left__title mb-2 my-2">{{title}}</div>
+            <div class="card-body-content__left__description">
+                {{description}}
+            </div>
+        </div>
+        <div class="card-body-content__right col-lg-3 d-flex justify-content-center px-2">
+            <img lazy class="mr-2 card-body-content__right__thumbnail"
+                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+        </div>
+    </div>
+
+    <div class="card-body-content__tags mt-2" *ngIf="tags">
+        <span class="card-body-content__tags__item" *ngFor="let tag of tags">#{{tag.title}}</span>
+    </div>
+</div>

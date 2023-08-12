@@ -19,7 +19,6 @@ export const appConfigure: ApplicationConfig = {
             // },
             {
                 path: '',
-                pathMatch: "full",
                 // resolve: { data: userResolver },
                 loadComponent() {
                     return import('./main').then((m) => m.MainComponent);

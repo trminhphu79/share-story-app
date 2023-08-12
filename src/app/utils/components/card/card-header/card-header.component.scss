@@ -1,0 +1,19 @@
+.card-header-content {
+
+    &__author-avatar {
+        border-radius: var(--theme-border-50);
+        width: var(--theme-fs-25);
+        height: var(--theme-fs-25);
+    }
+
+    &__author-name {
+        font-size: var(--theme-fs-primary);
+        color: var(--theme-label-primary)
+    }
+
+    &__time {
+        font-size: var(--theme-fs-primary);
+        color: var(--theme-label-secondary);
+        font-weight: var(--theme-fw-300);
+    }
+}

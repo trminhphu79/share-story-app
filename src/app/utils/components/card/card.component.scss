@@ -1,0 +1,15 @@
+.card-wrapper {
+    width: 100%;
+}
+
+.description {
+    display: -webkit-box;
+    /* Set the display type to a flexible box */
+    -webkit-box-orient: vertical;
+    /* Set the box orientation to vertical */
+    overflow: hidden;
+    /* Hide any overflowed content */
+    -webkit-line-clamp: 2;
+    /* Limit the content to 3 lines */
+    text-overflow: ellipsis;
+}

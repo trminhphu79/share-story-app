@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import modules from './main.import';
 import { Router } from '@angular/router';
 import { BaseComponent } from '../utils/base/base.component';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: "tmp-main",
@@ -21,6 +22,7 @@ export class MainComponent extends BaseComponent {
     const appState = this.stateService.currentState;
     appState.ready = true;
     this.stateService.commit(appState);
+    initFlowbite();
   }
 }
 

@@ -1,0 +1,66 @@
+.card-body-content {
+
+    &__left {
+        &__title {
+            font-size: var(--theme-fs-thirdly);
+            font-weight: var(--theme-fw-600);
+        }
+
+        &__description {
+            font-size: var(--theme-fs-primary);
+            font-weight: var(--theme-fw-300);
+            display: -webkit-box;
+            /* Set the display type to a flexible box */
+            -webkit-box-orient: vertical;
+            /* Set the box orientation to vertical */
+            overflow: hidden;
+            /* Hide any overflowed content */
+            -webkit-line-clamp: 3;
+            /* Limit the content to 3 lines */
+            text-overflow: ellipsis;
+            /* Add ellipsis at the end of the last visible line */
+        }
+    }
+
+    &__right {
+        &__thumbnail {
+            width: 112px;
+            height: 112px;
+            border-radius: var(--theme-border-tertiary);
+        }
+    }
+
+    &__tags {
+        &__item {
+            padding: 3px 6px;
+            margin-right: 8px;
+            border-radius: var(--theme-border-tertiary);
+            background-color: var(--theme-background-tertiary);
+            color: var(--theme-label-secondary)
+        }
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    .card-body-content {
+
+        &__left {
+            &__title {
+                font-size: var(--theme-fs-secondary);
+            }
+
+            &__description {
+                display: none;
+            }
+
+        }
+
+        &__right {
+            &__thumbnail {
+                width: 86px;
+                height: 56px;
+            }
+        }
+    }
+}

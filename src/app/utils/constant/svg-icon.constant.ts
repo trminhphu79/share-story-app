@@ -24,6 +24,10 @@ const SOCIAL_ICIONS: TIconsList[] = [
     {
         urlIcon: "assets/icons/ic_default_avatar.svg",
         key: "ic_default_avatar"
+    },
+    {
+        urlIcon: "assets/icons/ic_search.svg",
+        key: "ic_search"
     }
 ]
 

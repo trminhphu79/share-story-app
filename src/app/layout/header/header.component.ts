@@ -15,9 +15,9 @@ import { takeUntil } from 'rxjs';
 import { IUser } from '@utils/schema';
 import { Effect } from '@utils/state';
 import { UserAvatarComponent } from './components';
-import { InputSearchComponent } from './components/input-search';
-import { HeaderLoggedComponent } from './components/header-logged';
-import { HeaderNoneLoginComponent } from './components/header-none-login';
+import { InputSearchComponent } from './components';
+import { HeaderLoggedComponent } from './components';
+import { HeaderNoneLoginComponent } from './components';
 
 @Component({
   selector: "tmp-header",
@@ -62,24 +62,24 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
   ngOnChanges() {
   }
 
-  onEnter(result: string) {
-    console.log('enter...', result);
-    this.router.navigate(['/tim-kiem'])
+  public requestSearchChanges(result: string) {
+    const keyword = result || "all"
+    this.router.navigate([`tim-kiem/${keyword}`])
   }
 
-  ngAfterViewInit() {
+  public ngAfterViewInit() {
     initTE({ Collapse, Dropdown, Ripple });
   }
 
-  requestSignUp() {
+  public requestSignUp() {
     this.router.navigate(['/signin/re'])
   }
 
-  requestSignIn() {
+  public requestSignIn() {
     this.router.navigate(['/signin/in'])
   }
 
-  requestLogout() {
+  public requestLogout() {
     this.sessionService.logout$().subscribe({
       next: () => {
         this.user = null;
@@ -92,10 +92,7 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
     })
   }
 
-  toggleDropdown() {
-    const myDropdown = document.getElementById('customDropdown');
-    const myDropdownInstance = new Dropdown(myDropdown);
-    myDropdownInstance.show();
-    console.log('show...', myDropdownInstance)
+  public requestSearching() {
+    this.router.navigate(['tim-kiem/all'])
   }
 }

@@ -23,6 +23,10 @@ import {MatRippleModule} from '@angular/material/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserAvatarComponent {
-  @Input() user: IUser | null = null;
-  @Output() logout = new EventEmitter();
+  @Input() 
+  public user: IUser | null = null;
+  @Output() 
+  public logout = new EventEmitter();
+  @Output() 
+  public requestSearching =  new EventEmitter();
 }

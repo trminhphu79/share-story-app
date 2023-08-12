@@ -6,6 +6,7 @@ import {
 } from "tw-elements";
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, startWith, tap } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'tmp-input-search',
@@ -13,6 +14,7 @@ import { debounceTime, distinctUntilChanged, startWith, tap } from 'rxjs';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MatIconModule
   ],
   templateUrl: './input-search.component.html',
   styleUrls: ['./input-search.component.scss'],
@@ -27,7 +29,6 @@ export class InputSearchComponent {
   }
 
   enter() {
-    console.log('enter....')
     this.onEnter.emit(this.searchControl.value)
   }
 }

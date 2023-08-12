@@ -1,18 +1,19 @@
 <section class="h-screen">
-    <div class="container h-full px-2 py-24 m-auto">
-        <div class="w-full g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
+    <div class=" h-full px-4 py-24 w-9/12 mobile:py-0 mobile:w-full  m-auto mobile:w-full">
+        <div class="w-full flex sm:flex-wrap mobile:flex-wrap md:flex-wrap h-full items-center justify-center">
             <!-- Left column container with background-->
-            <div class="mb-12 md:mb-0 md:w-6/12">
-                <img src="{{bgImage}}" class="w-full" alt="Phone image" loading="lazy" />
+            <div class="w-full flex justify-center">
+                <img src="{{bgImage}}" class="w-8/12 h-8/12 mobile:w-4/5 mobile:h-4/5 " alt="Phone image"
+                    loading="lazy" />
             </div>
 
             <!-- Right column container with form -->
-            <div class="mobile:w-full sm:w-9/12 md:w-4/12 md:m-auto">
-                <tmp-login *ngIf="type == 'in';else registerTemplate" [formGroup]="form"
+            <div class="min-w-fit mobile:w-full">
+                <tmp-login *ngIf="type == 'in' && form ;else registerTemplate" [formGroup]="form"
                     (requestGoogleOAuth)="requestGoogleOAuth()" (submitSignIn)="submitSignIn()"
                     (requestRegister)="requestRegister()"></tmp-login>
                 <ng-template #registerTemplate>
-                    <tmp-register (submitRegister)="submitRegister()" (requestSignIn)="requestSignIn()"
+                    <tmp-register *ngIf="form" (submitRegister)="submitRegister()" (requestSignIn)="requestSignIn()"
                         [formGroup]="form"></tmp-register>
                 </ng-template>
             </div>

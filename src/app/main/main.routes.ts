@@ -9,7 +9,7 @@ export const mainRoutes: Routes = [
         }
     },
     {
-        path: "tim-kiem",
+        path: "tim-kiem/:keyword",
         title: "Kết quả tìm kiếm",
         loadComponent() {
             return import('./search-result/search-result.component').then((c) => c.SearchResultComponent)
