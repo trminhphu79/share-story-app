@@ -1,0 +1,27 @@
+#trending {
+    min-width: 85%;
+    width: 85%;
+}
+
+@media screen and (max-width: 998px) {
+    #trending {
+        min-width: 90%;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #trending {
+        min-width: 92%;
+        width: 92%;
+    }
+}
+
+
+
+@media screen and (max-width: 480px) {
+    #trending {
+        min-width: 95%;
+        width: 95%;
+    }
+}

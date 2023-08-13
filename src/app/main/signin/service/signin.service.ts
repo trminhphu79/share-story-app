@@ -24,7 +24,7 @@ export class SignInService {
             .pipe(
                 tap(({ accessToken, refreshToken }) => {
                     if (accessToken && refreshToken) {
-                        this._setToken(accessToken, refreshToken);
+                        this.setToken(accessToken, refreshToken);
                     }
                 }),
                 switchMap(() => {
@@ -48,6 +48,24 @@ export class SignInService {
             })
     }
 
+    public getUserInfo(){
+        this._userClient.getItem$().subscribe({
+            next: (result: any) => {
+                if (result) {
+                    const appState = this._stateService.currentState;
+                    appState.me = result
+                    this._stateService.commit(appState);
+                    this._router.navigate(['']);
+                }
+            },
+            error: (error) => {
+                console.log(error);
+                if (error instanceof HttpErrorResponse && error.status == 401) {
+                }
+            }
+        })
+    }
+
     public register(params: IUserSignUp) {
         return this._userClient.submitItem$(params)
             .pipe(
@@ -63,7 +81,7 @@ export class SignInService {
             .subscribe({
                 next: ({ accessToken, refreshToken }) => {
                     if (accessToken && refreshToken) {
-                        this._setToken(accessToken, refreshToken);
+                        this.setToken(accessToken, refreshToken);
                         this._router.navigate(['']);
                     }
                 },
@@ -75,10 +93,10 @@ export class SignInService {
     }
 
     public oauthGoogle() {
-        window.open(getGoogleOAuthURL(), '_self')
+        window.open(getGoogleOAuthURL(), '_self');
     }
 
-    private _setToken(accessToken: string, refreshToken: string) {
+    public setToken(accessToken: string|null, refreshToken: string|null) {
         this._localStorage.setItem("accessToken", accessToken);
         this._localStorage.setItem("refreshToken", refreshToken);
     }

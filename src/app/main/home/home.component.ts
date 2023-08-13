@@ -6,6 +6,7 @@ import { PostStore } from './store';
 import { PostService } from './service';
 import { map } from 'rxjs';
 import { CardComponent } from '@utils/components/card';
+import { BaseComponent } from '@utils/base';
 
 @Component({
   selector: 'tmp-home',
@@ -13,20 +14,21 @@ import { CardComponent } from '@utils/components/card';
   imports: [
     CommonModule,
     PostListComponent,
-    CardComponent
+    CardComponent,
   ],
   providers: [PostStore, PostClient, PostService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeComponent {
+export class HomeComponent extends BaseComponent {
   private _service = inject(PostService);
   public items$ = this._service.postList$.pipe(
     map((result) => result.slice(0, 10)),
   )
 
   constructor() {
+    super();
     this._service.sync();
   }
 }

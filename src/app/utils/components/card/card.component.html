@@ -1,36 +1,64 @@
-<section class="bg-white dark:bg-gray-900">
-    <div class="py-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+<section class="bg-white dark:bg-gray-900">  
+    <div class="mx-auto max-w-screen-xl">
         <div class="grid gap-8 lg:grid-cols-2">
-            <article class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
-                <h2 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"><a
-                        href="#">{{item.title}}</a></h2>
-                <p class="description mb-5 font-light text-gray-500 dark:text-gray-400">{{item.description}}</p>
-                <div class="flex justify-between items-center">
-                    <div class="flex items-center space-x-4">
-                        <img class="w-7 h-7 rounded-full" src="{{item.author.avatarUrl}}" alt="Jese Leos avatar" />
-                        <span class="font-medium dark:text-white">
-                            {{item.author.name}}
-                        </span>
+            <article class="p-4 bg-white  dark:bg-gray-800 {{shadow ? 'shadow-sm mb-3' :''}} rounded-lg">
+                <div class="w-full flex">
+                    <div class="w-10/12 mobile:w-9/12">
+                        <ng-container [ngTemplateOutlet]="titleTemplate || defaultTitleTemp"
+                            [ngTemplateOutletContext]="{item: item, index: index}"></ng-container>
+                        <ng-container [ngTemplateOutlet]="descriptionTemplate || defaultDescriptionTemp"
+                            [ngTemplateOutletContext]="{item: item, index: index}"></ng-container>
                     </div>
-                    <a href="#"
-                        class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
-                        Read more
-                        <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
+                    <ng-container [ngTemplateOutlet]="thumbnailTemplate || defaultThumbnailTemp"
+                        [ngTemplateOutletContext]="{item: item, index: index}"></ng-container>
                 </div>
-                <div class="flex justify-between items-center mt-5 text-gray-500">
-                    <span
-                        class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                        Angular
-                    </span>
-                    <span class="text-sm">14 days ago</span>
-                </div>
+                <ng-container [ngTemplateOutlet]="authorTemplate || defaultAuthorTemp"
+                    [ngTemplateOutletContext]="{item: item, index: index}"></ng-container>
+                <ng-container [ngTemplateOutlet]="createAtTemplate || defaultCreateAtTemplate"
+                    [ngTemplateOutletContext]="{item: item, index: index}"></ng-container>
             </article>
         </div>
     </div>
 </section>
+
+<ng-template #defaultAuthorTemp let-item="item">
+    <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <img class="w-8 h-8 rounded-full" src="{{item.author.avatarUrl}}" alt="Jese Leos avatar" />
+            <span class="font-medium text-gray-800 dark:text-white text-sm mobile:text-sm">
+                {{item.author.name}}
+            </span>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #defaultCreateAtTemplate let-item="item">
+    <div class="flex justify-between items-center mt-5 text-gray-500">
+        <span
+            class="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+            Angular
+        </span>
+        <span class="text-sm ">14 ngày trước</span>
+    </div>
+</ng-template>
+
+<ng-template #defaultTitleTemp let-item="item">
+    <h2
+        class="mb-2 text-xl sm:text-lg md:text-lg mobile:text-lg font-bold tracking-tight text-gray-600 dark:text-white">
+        <a class="cursor-pointer hover:text-gray-500 transition duration-200">{{item.title}}</a>
+    </h2>
+</ng-template>
+
+<ng-template #defaultDescriptionTemp let-item="item">
+    <div class="mobile:hidden w-full pr-2">
+        <p class="description mb-5 font-light text-gray-500 dark:text-gray-400 ">
+            {{item.description}}</p>
+    </div>
+</ng-template>
+
+<ng-template #defaultThumbnailTemp let-item="item">
+    <div class="w-2/12 mobile:w-3/12 flex items-center">
+        <img class="w-full rounded-lg" src="https://miro.medium.com/v2/resize:fill:400:268/0*_82itPxsjjcCsFb4"
+            alt="Jese Leos avatar" />
+    </div>
+</ng-template>

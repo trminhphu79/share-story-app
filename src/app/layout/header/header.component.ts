@@ -46,20 +46,16 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
   }
 
   ngOnInit() {
-    console.log(this.appState.me)
+    console.log(this.user)
     this.stateService.stateChanges$.pipe(takeUntil(this.destroy$)).subscribe({
       next: (result) => {
         if (result instanceof Effect) {
           this.user = result.newState.me;
           this.ready = result.newState.ready;
           this.changeDetectorRef.detectChanges();
-          console.log(this.user)
         }
       }
     })
-  }
-
-  ngOnChanges() {
   }
 
   public requestSearchChanges(result: string) {
@@ -85,6 +81,7 @@ export class HeaderComponent extends BaseComponent implements AfterViewInit {
         this.user = null;
         this.appState.me = null;
         this.stateService.commit(this.appState);
+        this.localStorage.clear();
       },
       error: (error) => {
         console.log(error)

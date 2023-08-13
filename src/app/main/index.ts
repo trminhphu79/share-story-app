@@ -1,2 +1,2 @@
-export * from './main.component';
 export * from './main.routes';
+export * from './main';

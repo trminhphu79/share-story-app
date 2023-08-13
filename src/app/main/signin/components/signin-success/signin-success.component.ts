@@ -1,28 +1,34 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LocalStorageService } from '@utils/service';
+import { ActivatedRoute } from '@angular/router';
+import { SignInService } from '@main/signin/service';
+import { BaseComponent } from '@utils/base';
+import { SessionClient, UserClient } from '@main/signin/client';
 
 @Component({
   selector: 'tmp-signin-success',
   standalone: true,
   imports: [CommonModule],
   template: "",
+  providers: [
+    SignInService,
+    UserClient,
+    SessionClient
+  ],
   styleUrls: ['./signin-success.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SigninSuccessComponent {
+export class SigninSuccessComponent extends BaseComponent {
   private _route: ActivatedRoute = inject(ActivatedRoute);
-  private _router: Router = inject(Router);
-  private _localStorage = inject(LocalStorageService)
+  private _service = inject(SignInService);
   constructor() {
+    super();
   }
 
   ngOnInit() {
     this._route.queryParamMap.subscribe(queryParams => {
-      this._localStorage.setItem("accessToken", queryParams.get('accessToken'));
-      this._localStorage.setItem("refreshToken", queryParams.get('refreshToken'));
-      this._router.navigate([''])
+      this._service.setToken(queryParams.get('accessToken'), queryParams.get('refreshToken'));
+      this._service.getUserInfo();
     });
   }
 }

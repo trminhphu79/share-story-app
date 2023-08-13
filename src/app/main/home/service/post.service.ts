@@ -15,10 +15,8 @@ export class PostService {
         this._isLoading$.next(true);
         console.log(this.isLoading$)
         this.postClient.getListAll().subscribe(result => {
-            setTimeout(() => {
-                this.postStore.update(result);
-                this._isLoading$.next(false)
-            }, 1500)
+            this.postStore.update(result);
+            this._isLoading$.next(false)
         })
     }
 

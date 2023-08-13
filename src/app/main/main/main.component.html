@@ -1,0 +1,21 @@
+<tmp-header></tmp-header>
+<ng-container *ngIf="!appState.me">
+    <tmp-introduction class="w-full" (start)="start()"></tmp-introduction>
+    <tmp-top-trending class="w-full" [dataSource]="trendingList$ | async"></tmp-top-trending>
+    <div class="w-full h-0.5 bg-gray-50"></div>
+</ng-container>
+<main id="main-content" class="m-auto py-2" [class.mt-16]="appState.me">
+    <div class="w-full flex">
+        <div class="w-7/12 mobile:w-full">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="w-5/12 mobile:hidden">
+            Right nav bar
+        </div>
+    </div>
+</main>
+<tmp-scroll-to-top></tmp-scroll-to-top>
+
+<ng-template #loading>
+    <tmp-loader></tmp-loader>
+</ng-template>

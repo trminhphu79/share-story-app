@@ -1,0 +1,42 @@
+<div id="trending" class="m-auto ">
+    <div class="mt-4 flex items-center">
+        <mat-icon svgIcon="ic_trending" class="text-gray-700"></mat-icon>
+        <span class="text-lg font-medium ml-2 text-gray-700">Top trending on SCommunity</span>
+    </div>
+    <div class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mobile:grid-cols-1" *ngIf="dataSource">
+        <ng-container *ngFor="let item of dataSource; let i = index">
+            <div class="flex">
+                <div class="font-bold text-gray-300 text-3xl w-2/12 py-4 text-end">0{{i+1}}</div>
+                <tmp-card class="w-10/12" [shadow]="false" [item]="item" [index]="i" [descriptionTemplate]="descriptionTemplate"
+                    [thumbnailTemplate]="thumbnailTemplate" [createAtTemplate]="createAtTemplate"
+                    [titleTemplate]="titleTemplate" [authorTemplate]="authorTemplate"></tmp-card>
+            </div>
+        </ng-container>
+
+        <ng-template #descriptionTemplate>
+        </ng-template>
+
+        <ng-template #thumbnailTemplate>
+        </ng-template>
+
+        <ng-template #authorTemplate let-item="item">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <img class="w-8 h-8 rounded-full" src="{{item.author.avatarUrl}}" alt="Jese Leos avatar" />
+                    <span class="font-medium text-gray-600 dark:text-white text-sm">
+                        {{item.author.name}}
+                    </span>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template #createAtTemplate></ng-template>
+
+        <ng-template #titleTemplate let-item="item">
+            <h2 class="mb-2 text-lg mobile:text-sm font-bold tracking-tight text-gray-900 dark:text-white">
+                <a class="cursor-pointer text-gray-600 hover:text-gray-500 transition duration-200">{{item.title}}</a>
+            </h2>
+        </ng-template>
+
+    </div>
+</div>

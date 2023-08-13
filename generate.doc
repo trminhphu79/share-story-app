@@ -5,7 +5,7 @@ ng g @schematics/angular:component home --change-detection OnPush --skip-import 
 ng g @schematics/angular:component sidebar --change-detection OnPush --skip-import --skip-tests --standalone
 
 ng g @schematics/angular:component login --change-detection OnPush --skip-import --skip-tests --standalone && (cd login && touch index.ts) 
-ng g @schematics/angular:component card --change-detection OnPush --skip-import --skip-tests --standalone && (cd card && touch index.ts)
+ng g @schematics/angular:component main --change-detection OnPush --skip-import --skip-tests --standalone && (cd main && touch index.ts)
 
 
 ng g @schematics/angular:component search-result --change-detection OnPush --skip-import --skip-tests --standalone && (cd search-result && touch index.ts search-result.model.ts search-result.util.ts search-result.constant.ts && mkdir component service client store  && (cd service && touch index.ts) && (cd client && touch index.ts) && (cd store && touch index.ts) && (cd component && touch index.ts))
