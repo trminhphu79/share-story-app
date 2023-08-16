@@ -1,9 +1,9 @@
 <div class="mb-4 border-b border-gray-100 dark:border-gray-700">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent"
         role="tablist">
-        <li data-te-ripple-init *ngFor="let tab of tabs">
+        <li data-te-ripple-init class=" transition duration-200 border-b rounded-t-lg {{tab.isActive ? 'text-primary border-primary' : 'border-transparent'}}" *ngFor="let tab of tabs">
             <button (click)="selectTab(tab.id)"
-                class="inline-block p-4 transition duration-200 border-b-2 rounded-t-lg {{tab.isActive ? 'text-primary border-primary' : ''}}">{{tab.title}}</button>
+                class="inline-block p-4">{{tab.title}}</button>
         </li>
         <!-- <li class="mr-2" data-te-ripple-init>
             <button
@@ -19,7 +19,7 @@
         </li> -->
         <li>
             <div class="inline-block p-4 w-12 h-full" (click)="addTab()">
-                <mat-icon class="text-gray-500 cursor-pointer" svgIcon="ic_plus"></mat-icon>
+                <mat-icon class="text-gray-300 cursor-pointer" svgIcon="ic_plus"></mat-icon>
             </div>
         </li>
     </ul>
