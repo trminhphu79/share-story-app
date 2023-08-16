@@ -32,6 +32,10 @@ const SOCIAL_ICIONS: TIconsList[] = [
     {
         urlIcon: "assets/icons/ic_trending.svg",
         key: "ic_trending"
+    },
+    {
+        urlIcon: "assets/icons/ic_plus.svg",
+        key: "ic_plus"
     }
 ]
 

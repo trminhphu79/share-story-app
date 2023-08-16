@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PostListComponent } from './components';
+import { PostListComponent, TabsComponent } from './components';
 import { PostClient } from './client';
 import { PostStore } from './store';
 import { PostService } from './service';
@@ -15,6 +15,7 @@ import { BaseComponent } from '@utils/base';
     CommonModule,
     PostListComponent,
     CardComponent,
+    TabsComponent
   ],
   providers: [PostStore, PostClient, PostService],
   templateUrl: './home.component.html',
